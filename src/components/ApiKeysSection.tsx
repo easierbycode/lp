@@ -1,20 +1,28 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function ApiKeysSection() {
   const [appId, setAppId] = useState("");
   const [appSecret, setAppSecret] = useState("");
+  const [redirectUri, setRedirectUri] = useState("");
   const [showSecret, setShowSecret] = useState(false);
   const [saved, setSaved] = useState(false);
-  const [saving, setSaving] = useState(false);
 
-  const handleSave = async () => {
-    if (!appId || !appSecret) return;
-    setSaving(true);
-    // Simulate saving — in production this would POST to your API
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    setSaving(false);
+  useEffect(() => {
+    setAppId(localStorage.getItem("tiktok_app_id") || "");
+    setAppSecret(localStorage.getItem("tiktok_app_secret") || "");
+    setRedirectUri(
+      localStorage.getItem("tiktok_redirect_uri") ||
+        `${window.location.origin}/callback`
+    );
+  }, []);
+
+  const handleSave = () => {
+    if (!appId) return;
+    localStorage.setItem("tiktok_app_id", appId);
+    localStorage.setItem("tiktok_app_secret", appSecret);
+    localStorage.setItem("tiktok_redirect_uri", redirectUri);
     setSaved(true);
     setTimeout(() => setSaved(false), 3000);
   };
@@ -27,8 +35,8 @@ export default function ApiKeysSection() {
             API Keys Configuration
           </h2>
           <p className="mx-auto max-w-2xl text-muted">
-            Enter your TikTok Marketing API credentials below. These are used to
-            authenticate requests and connect your ad accounts.
+            Enter your TikTok Marketing API credentials below. These are stored
+            locally in your browser and used to initiate the OAuth connection.
           </p>
         </div>
 
@@ -89,11 +97,11 @@ export default function ApiKeysSection() {
               </button>
             </div>
             <p className="mt-1.5 text-xs text-muted">
-              Keep this secret safe. Never share it publicly or commit it to version control.
+              Used server-side for token exchange. Stored locally in your browser only.
             </p>
           </div>
 
-          {/* Redirect URI (read-only) */}
+          {/* Redirect URI */}
           <div className="mb-8">
             <label
               htmlFor="redirect-uri"
@@ -105,23 +113,13 @@ export default function ApiKeysSection() {
               <input
                 id="redirect-uri"
                 type="text"
-                readOnly
-                value={
-                  typeof window !== "undefined"
-                    ? `${window.location.origin}/api/tiktok/callback`
-                    : "/api/tiktok/callback"
-                }
-                className="w-full rounded-xl border border-border bg-surface px-4 py-3 text-sm text-muted"
+                value={redirectUri}
+                onChange={(e) => setRedirectUri(e.target.value)}
+                className="w-full rounded-xl border border-border bg-surface px-4 py-3 text-sm text-muted focus:border-tiktok-red focus:text-foreground focus:outline-none focus:ring-1 focus:ring-tiktok-red"
               />
               <button
                 type="button"
-                onClick={() => {
-                  const uri =
-                    typeof window !== "undefined"
-                      ? `${window.location.origin}/api/tiktok/callback`
-                      : "/api/tiktok/callback";
-                  navigator.clipboard.writeText(uri);
-                }}
+                onClick={() => navigator.clipboard.writeText(redirectUri)}
                 className="shrink-0 rounded-xl border border-border bg-surface px-4 py-3 text-sm text-muted transition-colors hover:text-foreground"
               >
                 Copy
@@ -135,16 +133,16 @@ export default function ApiKeysSection() {
           {/* Save button */}
           <button
             onClick={handleSave}
-            disabled={!appId || !appSecret || saving}
+            disabled={!appId}
             className="connect-btn w-full rounded-xl px-6 py-3 text-sm font-semibold text-white disabled:opacity-40 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none"
           >
-            {saving ? "Saving..." : saved ? "Saved Successfully!" : "Save API Keys"}
+            {saved ? "Saved!" : "Save API Keys"}
           </button>
 
           {saved && (
             <p className="mt-4 text-center text-sm text-tiktok-cyan">
-              Credentials saved. You can now connect your TikTok account using
-              the button above.
+              Credentials saved to your browser. You can now use the Connect
+              button to start the OAuth flow.
             </p>
           )}
         </div>
@@ -152,10 +150,11 @@ export default function ApiKeysSection() {
         {/* Environment variables hint */}
         <div className="mt-8 card p-6">
           <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-muted">
-            Environment Variables
+            Server-Side Setup
           </h3>
           <p className="mb-4 text-sm text-muted">
-            For production deployments, set these environment variables instead of using the form:
+            For your backend server that handles the OAuth callback and token exchange,
+            set these environment variables:
           </p>
           <div className="space-y-2 rounded-xl bg-background p-4 font-mono text-sm">
             <div>
@@ -168,11 +167,7 @@ export default function ApiKeysSection() {
             </div>
             <div>
               <span className="text-tiktok-cyan">TIKTOK_REDIRECT_URI</span>
-              <span className="text-muted">=https://yourdomain.com/api/tiktok/callback</span>
-            </div>
-            <div>
-              <span className="text-tiktok-cyan">NEXTAUTH_SECRET</span>
-              <span className="text-muted">=a_random_secret_for_session_encryption</span>
+              <span className="text-muted">=https://yourdomain.com/callback</span>
             </div>
           </div>
         </div>

@@ -1,0 +1,88 @@
+@import "tailwindcss";
+
+:root {
+  --background: #000000;
+  --foreground: #ededed;
+  --tiktok-red: #fe2c55;
+  --tiktok-cyan: #25f4ee;
+  --tiktok-blue: #5b5fc7;
+  --surface: #111111;
+  --surface-hover: #1a1a1a;
+  --border: #222222;
+  --muted: #888888;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-tiktok-red: var(--tiktok-red);
+  --color-tiktok-cyan: var(--tiktok-cyan);
+  --color-tiktok-blue: var(--tiktok-blue);
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+  --color-border: var(--border);
+  --color-muted: var(--muted);
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, "Cascadia Code", "Fira Code", monospace;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(254, 44, 85, 0.3), 0 0 20px rgba(37, 244, 238, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(254, 44, 85, 0.5), 0 0 40px rgba(37, 244, 238, 0.5); }
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--tiktok-cyan), var(--tiktok-red));
+  background-size: 200% 200%;
+  animation: gradient-shift 4s ease infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.connect-btn {
+  background: linear-gradient(135deg, var(--tiktok-red), var(--tiktok-blue));
+  transition: all 0.3s ease;
+}
+
+.connect-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(254, 44, 85, 0.4);
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  border-color: rgba(254, 44, 85, 0.3);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}

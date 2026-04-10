@@ -2,7 +2,36 @@
 
 import TikTokIcon from "./TikTokIcon";
 
+function buildTikTokAuthUrl(): string | null {
+  const appId = localStorage.getItem("tiktok_app_id");
+  if (!appId) return null;
+
+  const redirectUri =
+    localStorage.getItem("tiktok_redirect_uri") ||
+    `${window.location.origin}/callback`;
+
+  const state = crypto.randomUUID();
+  sessionStorage.setItem("tiktok_oauth_state", state);
+
+  const authUrl = new URL("https://business-api.tiktok.com/portal/auth");
+  authUrl.searchParams.set("app_id", appId);
+  authUrl.searchParams.set("state", state);
+  authUrl.searchParams.set("redirect_uri", redirectUri);
+  authUrl.searchParams.set("rid", crypto.randomUUID());
+
+  return authUrl.toString();
+}
+
 export default function HeroSection() {
+  const handleConnect = () => {
+    const url = buildTikTokAuthUrl();
+    if (!url) {
+      document.getElementById("api-keys")?.scrollIntoView({ behavior: "smooth" });
+      return;
+    }
+    window.location.href = url;
+  };
+
   return (
     <section
       id="connect"
@@ -33,9 +62,7 @@ export default function HeroSection() {
 
         <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
           <button
-            onClick={() => {
-              window.location.href = "/api/tiktok/connect";
-            }}
+            onClick={handleConnect}
             className="connect-btn animate-pulse-glow flex items-center gap-3 rounded-full px-8 py-4 text-lg font-semibold text-white"
           >
             <TikTokIcon className="w-6 h-6" />

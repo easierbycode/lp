@@ -1,0 +1,3 @@
+# Static assets (e.g. favicon.ico, robots.txt) are placed in this directory.
+# This placeholder ensures the folder is tracked by git so @deno/svelte-adapter
+# can find it during build.

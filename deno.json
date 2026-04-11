@@ -3,7 +3,8 @@
     "dev": "deno run -A npm:vite dev",
     "build": "deno run -A npm:vite build",
     "preview": "deno run -A npm:vite preview",
-    "serve": "deno run -A ./.deno-deploy/server.ts"
+    "serve": "deno run -A main.ts",
+    "serve:prod": "deno run -A ./.deno-deploy/server.ts"
   },
   "nodeModulesDir": "auto"
 }

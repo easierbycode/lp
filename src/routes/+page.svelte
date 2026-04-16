@@ -5,6 +5,7 @@
   import SetupSteps from "$lib/components/SetupSteps.svelte";
   import ApiKeysSection from "$lib/components/ApiKeysSection.svelte";
   import Footer from "$lib/components/Footer.svelte";
+  import CookieBanner from "$lib/components/CookieBanner.svelte";
 </script>
 
 <Header />
@@ -15,3 +16,4 @@
   <ApiKeysSection />
 </main>
 <Footer />
+<CookieBanner />

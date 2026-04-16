@@ -51,7 +51,7 @@
           type="text"
           bind:value={appId}
           placeholder="Enter your TikTok App ID"
-          class="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted/50 focus:border-tiktok-red focus:outline-none focus:ring-1 focus:ring-tiktok-red"
+          class="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted/50 focus:border-lp-orange focus:outline-none focus:ring-1 focus:ring-lp-orange"
         />
         <p class="mt-1.5 text-xs text-muted">
           Found in your TikTok for Developers dashboard under My Apps.
@@ -72,7 +72,7 @@
             type={showSecret ? "text" : "password"}
             bind:value={appSecret}
             placeholder="Enter your TikTok App Secret"
-            class="w-full rounded-xl border border-border bg-background px-4 py-3 pr-12 text-sm text-foreground placeholder:text-muted/50 focus:border-tiktok-red focus:outline-none focus:ring-1 focus:ring-tiktok-red"
+            class="w-full rounded-xl border border-border bg-background px-4 py-3 pr-12 text-sm text-foreground placeholder:text-muted/50 focus:border-lp-orange focus:outline-none focus:ring-1 focus:ring-lp-orange"
           />
           <button
             type="button"
@@ -135,7 +135,7 @@
             id="redirect-uri"
             type="text"
             bind:value={redirectUri}
-            class="w-full rounded-xl border border-border bg-surface px-4 py-3 text-sm text-muted focus:border-tiktok-red focus:text-foreground focus:outline-none focus:ring-1 focus:ring-tiktok-red"
+            class="w-full rounded-xl border border-border bg-surface px-4 py-3 text-sm text-muted focus:border-lp-orange focus:text-foreground focus:outline-none focus:ring-1 focus:ring-lp-orange"
           />
           <button
             type="button"
@@ -154,13 +154,13 @@
       <button
         onclick={handleSave}
         disabled={!appId}
-        class="connect-btn w-full rounded-xl px-6 py-3 text-sm font-semibold text-white disabled:opacity-40 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none"
+        class="btn-primary w-full rounded-xl px-6 py-3 text-sm font-semibold disabled:opacity-40 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none"
       >
         {saved ? "Saved!" : "Save API Keys"}
       </button>
 
       {#if saved}
-        <p class="mt-4 text-center text-sm text-tiktok-cyan">
+        <p class="mt-4 text-center text-sm text-lp-orange">
           Credentials saved to your browser. You can now use the Connect button
           to start the OAuth flow.
         </p>
@@ -180,15 +180,15 @@
       </p>
       <div class="space-y-2 rounded-xl bg-background p-4 font-mono text-sm">
         <div>
-          <span class="text-tiktok-cyan">TIKTOK_APP_ID</span>
+          <span class="text-lp-orange">TIKTOK_APP_ID</span>
           <span class="text-muted">=your_app_id</span>
         </div>
         <div>
-          <span class="text-tiktok-cyan">TIKTOK_APP_SECRET</span>
+          <span class="text-lp-orange">TIKTOK_APP_SECRET</span>
           <span class="text-muted">=your_app_secret</span>
         </div>
         <div>
-          <span class="text-tiktok-cyan">TIKTOK_REDIRECT_URI</span>
+          <span class="text-lp-orange">TIKTOK_REDIRECT_URI</span>
           <span class="text-muted">=https://yourdomain.com/callback</span>
         </div>
       </div>

@@ -90,7 +90,7 @@
           <div class="relative pl-16 md:pl-20">
             <!-- Step number circle -->
             <div
-              class="absolute left-0 flex h-12 w-12 items-center justify-center rounded-full border-2 border-tiktok-red bg-background text-sm font-bold text-tiktok-red md:left-2 md:h-14 md:w-14"
+              class="absolute left-0 flex h-12 w-12 items-center justify-center rounded-full border-2 border-lp-orange bg-background text-sm font-bold text-lp-orange md:left-2 md:h-14 md:w-14"
             >
               {step.number}
             </div>
@@ -125,7 +125,7 @@
                   {#each step.details as detail}
                     <li class="flex items-start gap-3 text-sm text-muted">
                       <svg
-                        class="mt-0.5 h-4 w-4 shrink-0 text-tiktok-cyan"
+                        class="mt-0.5 h-4 w-4 shrink-0 text-lp-orange"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"

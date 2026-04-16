@@ -66,7 +66,7 @@
       {#each permissions as perm}
         <div class="card p-6">
           <div
-            class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-tiktok-red/10 text-tiktok-red"
+            class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-lp-orange/10 text-lp-orange"
           >
             <svg
               class="w-6 h-6"
@@ -91,9 +91,9 @@
     </div>
 
     <div
-      class="mt-10 rounded-2xl border border-tiktok-cyan/20 bg-tiktok-cyan/5 p-6 text-center"
+      class="mt-10 rounded-2xl border border-lp-orange/20 bg-lp-orange/5 p-6 text-center"
     >
-      <p class="text-sm text-tiktok-cyan">
+      <p class="text-sm text-lp-orange">
         <strong>Your data is protected.</strong> We use read-only access by default.
         Management permissions require explicit approval. You retain full control
         and can disconnect at any time from your TikTok Business Center.
